@@ -1,0 +1,6 @@
+default:
+  suites:
+    default:
+      paths: [ "%paths.base%/tests/Behat/Features" ]
+      contexts:
+        - 'Fulll\Tests\Behat\Context\FeatureContext'
