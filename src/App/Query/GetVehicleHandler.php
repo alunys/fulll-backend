@@ -15,6 +15,6 @@ final readonly class GetVehicleHandler
 
     public function handle(GetVehicle $getVehicle): ?Vehicle
     {
-        return $this->vehicleRepository->getById($getVehicle->vehicleId);
+        return $this->vehicleRepository->getByPlateNumber($getVehicle->plateNumber);
     }
 }

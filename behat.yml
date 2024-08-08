@@ -4,3 +4,6 @@ default:
       paths: [ "%paths.base%/tests/Behat/Features" ]
       contexts:
         - 'Fulll\Tests\Behat\Context\FeatureContext'
+        - 'Fulll\Tests\Behat\Context\KernelContext'
+  extensions:
+    DAMA\DoctrineTestBundle\Behat\ServiceContainer\DoctrineExtension: ~

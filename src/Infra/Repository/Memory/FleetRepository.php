@@ -12,9 +12,9 @@ final class FleetRepository implements FleetRepositoryInterface
     /** @var Fleet[] */
     static private array $fleets = [];
 
-    public function getById(string $Id): ?Fleet
+    public function getById(string $id): ?Fleet
     {
-        return self::$fleets[$Id] ?? null;
+        return self::$fleets[$id] ?? null;
     }
 
     public function getByUserId(string $userId): ?Fleet

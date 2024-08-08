@@ -1,23 +1,18 @@
 MAKEFLAGS += --no-print-directory --silent
-DC := docker compose
-DCE := $(DC) exec
-DCR := $(DC) run --rm
-
+include Makefile.docker.mk
+include Makefile.qa.mk
 
 vendor: composer.lock
 	$(DCR) --no-deps php composer install
 
-behat: vendor
-	$(DCR) --no-deps php vendor/behat/behat/bin/behat $(ARGS)
+doctrine_migrations: vendor
+	$(DCR) php bin/console doctrine:migrations:migrate --no-interaction
 
-docker-stop:
-	$(DC) stop
+shell-php: vendor
+	$(DCR) php bash
 
-docker-down:
-	$(DC) down --remove-orphans || true
-
-docker-fix-rights:
-	if ! $(DC) exec php chown -R $(shell id -u):$(shell id -g) .; then $(DCR) --no-deps php chown -R $(shell id -u):$(shell id -g) .; fi
-
-docker-logs:
-	$(DC) logs -f
+fixtures:
+	$(SF_CONSOLE) doctrine:database:drop --force --if-exists
+	$(SF_CONSOLE) doctrine:database:create
+	$(SF_CONSOLE) doctrine:migrations:migrate --no-interaction
+	$(SF_CONSOLE) doctrine:fixtures:load --append --no-interaction

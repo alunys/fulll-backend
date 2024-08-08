@@ -12,13 +12,13 @@ final class VehicleRepository implements VehicleRepositoryInterface
     /** @var Vehicle[] */
     static private array $vehicles = [];
 
-    public function getById(string $id): ?Vehicle
+    public function getByPlateNumber(string $plateNumber): ?Vehicle
     {
-        return self::$vehicles[$id] ?? null;
+        return self::$vehicles[$plateNumber] ?? null;
     }
 
     public function save(Vehicle $vehicle): void
     {
-        self::$vehicles[$vehicle->id] = $vehicle;
+        self::$vehicles[$vehicle->plateNumber] = $vehicle;
     }
 }

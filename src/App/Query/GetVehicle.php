@@ -6,7 +6,7 @@ namespace Fulll\App\Query;
 
 final class GetVehicle
 {
-    public function __construct(public string $vehicleId)
+    public function __construct(public string $plateNumber)
     {
     }
 }
