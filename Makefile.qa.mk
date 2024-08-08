@@ -17,3 +17,6 @@ behat: vendor _database_test cc-test
 
 cs-fixer:
 	$(QA) php-cs-fixer fix --verbose
+
+phpstan: vendor
+	$(QA) phpstan analyze

@@ -11,6 +11,7 @@ use Fulll\Domain\Exception\VehicleIsAlreadyRegisteredInFleetException;
 class Fleet
 {
     public readonly string $id;
+    /** @var Collection<array-key, Vehicle> */
     private Collection $vehicles;
 
     public function __construct(

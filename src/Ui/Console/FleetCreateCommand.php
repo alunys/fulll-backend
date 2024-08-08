@@ -33,6 +33,10 @@ final class FleetCreateCommand extends Command
     {
         $userId = $input->getArgument('userId');
 
+        if (!\is_string($userId)) {
+            throw new \InvalidArgumentException('Invalid argument type');
+        }
+
         $this->eventDispatcher->addListener(FleetCreatedEvent::class, static function (FleetCreatedEvent $fleetCreatedEvent) use ($output): void {
             $output->writeln("Fleet created with id '{$fleetCreatedEvent->fleetId}'");
         });

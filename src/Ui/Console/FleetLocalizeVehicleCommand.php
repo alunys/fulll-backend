@@ -33,6 +33,10 @@ final class FleetLocalizeVehicleCommand extends Command
         $fleetId = $input->getArgument('fleetId');
         $vehiclePlateNumber = $input->getArgument('vehiclePlateNumber');
 
+        if (!\is_string($fleetId) || !\is_string($vehiclePlateNumber)) {
+            throw new \InvalidArgumentException('Invalid argument type');
+        }
+
         if (null === ($fleet = $this->getFleetHandler->handle(new GetFleet($fleetId)))) {
             $output->writeln('Fleet not found');
 
@@ -46,7 +50,11 @@ final class FleetLocalizeVehicleCommand extends Command
         }
 
         $location = $vehicle->getLocation();
-        $output->writeln("Vehicle localized at lat : {$location->lat}, long: {$location->long}");
+        if (null === $location) {
+            $output->writeln('Vehicle has no location');
+        } else {
+            $output->writeln("Vehicle localized at lat : {$location->lat}, long: {$location->long}");
+        }
 
         return self::SUCCESS;
     }

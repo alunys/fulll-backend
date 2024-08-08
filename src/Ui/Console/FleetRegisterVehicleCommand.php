@@ -33,6 +33,10 @@ final class FleetRegisterVehicleCommand extends Command
         $fleetId = $input->getArgument('fleetId');
         $vehiclePlateNumber = $input->getArgument('vehiclePlateNumber');
 
+        if (!\is_string($fleetId) || !\is_string($vehiclePlateNumber)) {
+            throw new \InvalidArgumentException('Invalid argument type');
+        }
+
         $this->registerVehicleHandler->handle(new RegisterVehicle($vehiclePlateNumber, $fleetId));
 
         return self::SUCCESS;

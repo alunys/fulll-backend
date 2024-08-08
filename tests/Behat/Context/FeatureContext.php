@@ -45,6 +45,7 @@ final class FeatureContext extends KernelTestCase implements Context
 
     public function __construct()
     {
+        parent::__construct();
         self::bootKernel();
         $this->container = self::getContainer();
     }

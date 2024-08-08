@@ -11,6 +11,7 @@ use Fulll\Domain\Repository\FleetRepositoryInterface;
 
 readonly class FleetRepository implements FleetRepositoryInterface
 {
+    /** @var ObjectRepository<Fleet> */
     private ObjectRepository $repository;
 
     public function __construct(private EntityManagerInterface $entityManager)
