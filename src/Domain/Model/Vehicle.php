@@ -14,8 +14,7 @@ class Vehicle
     public function __construct(
         public readonly string $plateNumber,
         private ?Location $location = null,
-    )
-    {
+    ) {
         $this->id = uniqid();
     }
 

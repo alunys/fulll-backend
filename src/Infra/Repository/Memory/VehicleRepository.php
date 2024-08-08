@@ -10,7 +10,7 @@ use Fulll\Domain\Repository\VehicleRepositoryInterface;
 final class VehicleRepository implements VehicleRepositoryInterface
 {
     /** @var Vehicle[] */
-    static private array $vehicles = [];
+    private static array $vehicles = [];
 
     public function getByPlateNumber(string $plateNumber): ?Vehicle
     {

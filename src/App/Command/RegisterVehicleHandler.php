@@ -23,11 +23,11 @@ final readonly class RegisterVehicleHandler
      */
     public function handle(RegisterVehicle $registerVehicle): void
     {
-        if(null === ($vehicle = $this->vehicleRepository->getByPlateNumber($registerVehicle->vehiclePlateNumber))) {
+        if (null === ($vehicle = $this->vehicleRepository->getByPlateNumber($registerVehicle->vehiclePlateNumber))) {
             throw new VehicleNotFoundException("Vehicle with plate number '{$registerVehicle->vehiclePlateNumber}' not found");
         }
 
-        if(null === ($fleet = $this->fleetRepository->getById($registerVehicle->fleetId))) {
+        if (null === ($fleet = $this->fleetRepository->getById($registerVehicle->fleetId))) {
             throw new FleetNotFoundException("Fleet with id '{$registerVehicle->fleetId}' not found");
         }
 

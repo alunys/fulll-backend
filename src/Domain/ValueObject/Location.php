@@ -6,11 +6,11 @@ namespace Fulll\Domain\ValueObject;
 
 final class Location
 {
-    public function __construct(public float $lat,public float $long)
+    public function __construct(public float $lat, public float $long)
     {
     }
 
-    public function equals(Location $location): bool
+    public function equals(self $location): bool
     {
         return $this->lat === $location->lat && $this->long === $location->long;
     }

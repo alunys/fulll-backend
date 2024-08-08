@@ -26,5 +26,13 @@ services:
     ports:
       - "6438:3306"
 
+  qa:
+    image: jakzal/phpqa:1.98.0-php8.3-alpine
+    working_dir: /var/www/html
+    volumes:
+      - .:/var/www/html
+      - qa-cache-phpstan:/tmp/phpstan
+
 volumes:
   mysql_data:
+  qa-cache-phpstan:

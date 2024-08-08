@@ -6,5 +6,4 @@ namespace Fulll\Domain\Exception;
 
 final class FleetNotFoundException extends \Exception
 {
-
 }

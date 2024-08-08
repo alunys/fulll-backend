@@ -17,7 +17,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 #[AsCommand(name: 'fulll:fleet-create', description: 'Create a new fleet for a user')]
 final class FleetCreateCommand extends Command
 {
-
     public function __construct(private readonly CreateFleetHandler $createFleetHandler, private readonly EventDispatcherInterface $eventDispatcher)
     {
         parent::__construct();
@@ -26,14 +25,15 @@ final class FleetCreateCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addArgument('userId', InputArgument::REQUIRED, 'The id of the user.');
+            ->addArgument('userId', InputArgument::REQUIRED, 'The id of the user.')
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $userId = $input->getArgument('userId');
 
-        $this->eventDispatcher->addListener(FleetCreatedEvent::class, static function (FleetCreatedEvent $fleetCreatedEvent) use ($output) {
+        $this->eventDispatcher->addListener(FleetCreatedEvent::class, static function (FleetCreatedEvent $fleetCreatedEvent) use ($output): void {
             $output->writeln("Fleet created with id '{$fleetCreatedEvent->fleetId}'");
         });
 

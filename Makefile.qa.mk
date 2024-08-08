@@ -1,3 +1,4 @@
+QA := $(DCR) qa
 DCR_TEST := $(DCR) -e APP_ENV=test
 DCR_TEST_PHP := $(DCR_TEST) php
 SF_CONSOLE_TEST := $(DCR_TEST_PHP) bin/console
@@ -13,3 +14,6 @@ _database_test:
 
 behat: vendor _database_test cc-test
 	$(DCR_TEST_PHP) vendor/bin/behat $(ARGS)
+
+cs-fixer:
+	$(QA) php-cs-fixer fix --verbose

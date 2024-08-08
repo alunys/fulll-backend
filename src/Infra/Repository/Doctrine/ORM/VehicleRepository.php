@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Fulll\Infra\Repository\Doctrine\ORM;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectRepository;
 use Fulll\Domain\Model\Vehicle;
 use Fulll\Domain\Repository\VehicleRepositoryInterface;
