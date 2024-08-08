@@ -6,7 +6,7 @@ namespace Fulll\App\Command;
 
 final readonly class RegisterVehicle
 {
-    public function __construct(public string $vehicleId, public string $fleetId)
+    public function __construct(public string $vehiclePlateNumber, public string $fleetId)
     {
     }
 }

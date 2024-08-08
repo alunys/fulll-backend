@@ -2,6 +2,29 @@ services:
   php:
     build:
       context: .
+    depends_on:
+      mysql:
+        condition: service_healthy
     volumes:
-      - .:/app
+      - ./:/app
+      - ./var:/app/var
 
+  mysql:
+    image: mysql:8.3.0
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot_password" ]
+      interval: 10s
+      timeout: 10s
+    volumes:
+      - ./docker/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - mysql_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_DATABASE=fulll-backend
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+    ports:
+      - "6438:3306"
+
+volumes:
+  mysql_data:

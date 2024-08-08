@@ -8,7 +8,7 @@ use Fulll\Domain\Model\Vehicle;
 
 interface VehicleRepositoryInterface
 {
-    public function getById(string $id): ?Vehicle;
+    public function getByPlateNumber(string $plateNumber): ?Vehicle;
 
     public function save(Vehicle $vehicle): void;
 }
