@@ -3,6 +3,8 @@ DCR_TEST := $(DCR) -e APP_ENV=test
 DCR_TEST_PHP := $(DCR_TEST) php
 SF_CONSOLE_TEST := $(DCR_TEST_PHP) bin/console
 
+tests: cs-fixer phpstan psalm rector-dry-run behat
+
 cc-test:
 	$(DCR_TEST_PHP) bin/console cache:clear
 
@@ -23,4 +25,13 @@ phpstan: vendor
 
 psalm: vendor
 	$(QA) psalm
-	$(QA) psalm -c psalm.tests.xml
+
+rector: vendor
+	$(QA) bin/console cache:clear
+	$(QA) rector
+	$(MAKE) docker-fix-rights
+
+rector-dry-run: vendor
+	$(QA) bin/console cache:clear
+	$(QA) rector --dry-run
+	$(MAKE) docker-fix-rights
