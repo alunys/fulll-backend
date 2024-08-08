@@ -33,6 +33,7 @@ final class FleetCreateCommand extends Command
     {
         $userId = $input->getArgument('userId');
 
+        /** @psalm-suppress TypeDoesNotContainType */
         if (!\is_string($userId)) {
             throw new \InvalidArgumentException('Invalid argument type');
         }

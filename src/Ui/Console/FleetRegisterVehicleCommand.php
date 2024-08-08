@@ -33,6 +33,7 @@ final class FleetRegisterVehicleCommand extends Command
         $fleetId = $input->getArgument('fleetId');
         $vehiclePlateNumber = $input->getArgument('vehiclePlateNumber');
 
+        /** @psalm-suppress TypeDoesNotContainType */
         if (!\is_string($fleetId) || !\is_string($vehiclePlateNumber)) {
             throw new \InvalidArgumentException('Invalid argument type');
         }
