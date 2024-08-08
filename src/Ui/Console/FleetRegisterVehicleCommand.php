@@ -40,6 +40,8 @@ final class FleetRegisterVehicleCommand extends Command
 
         $this->registerVehicleHandler->handle(new RegisterVehicle($vehiclePlateNumber, $fleetId));
 
+        $output->writeln('Vehicle registered successfully.');
+
         return self::SUCCESS;
     }
 }

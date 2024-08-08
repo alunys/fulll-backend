@@ -3,12 +3,13 @@ DCR_TEST := $(DCR) -e APP_ENV=test
 DCR_TEST_PHP := $(DCR_TEST) php
 SF_CONSOLE_TEST := $(DCR_TEST_PHP) bin/console
 
-tests: cs-fixer phpstan psalm rector-dry-run behat
+tests: cs-fixer_dry-run phpstan psalm rector-dry-run behat
 
 cc-test:
 	$(DCR_TEST_PHP) bin/console cache:clear
 
 _database_test:
+	$(DC) up -d
 	$(SF_CONSOLE_TEST) doctrine:database:drop --force --if-exists
 	$(SF_CONSOLE_TEST) doctrine:database:create
 	$(SF_CONSOLE_TEST) doctrine:migrations:migrate --no-interaction
@@ -19,6 +20,9 @@ behat: vendor _database_test cc-test
 
 cs-fixer:
 	$(QA) php-cs-fixer fix --verbose
+
+cs-fixer_dry-run:
+	$(QA) php-cs-fixer fix --diff --verbose --dry-run
 
 phpstan: vendor
 	$(QA) phpstan analyze
