@@ -9,9 +9,8 @@ use Fulll\Domain\ValueObject\Location;
 final readonly class ParkVehicle
 {
     public function __construct(
-        public string   $plateNumber,
+        public string $plateNumber,
         public Location $location,
-    )
-    {
+    ) {
     }
 }

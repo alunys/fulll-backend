@@ -4,22 +4,17 @@ declare(strict_types=1);
 
 namespace Fulll\Ui\Console;
 
-use Fulll\App\Command\CreateFleet;
-use Fulll\App\Command\CreateFleetHandler;
 use Fulll\App\Command\RegisterVehicle;
 use Fulll\App\Command\RegisterVehicleHandler;
-use Fulll\Domain\Event\FleetCreatedEvent;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 #[AsCommand(name: 'fulll:fleet-register-vehicle', description: 'Register a vehicle to a fleet')]
 final class FleetRegisterVehicleCommand extends Command
 {
-
     public function __construct(private readonly RegisterVehicleHandler $registerVehicleHandler)
     {
         parent::__construct();
@@ -38,7 +33,14 @@ final class FleetRegisterVehicleCommand extends Command
         $fleetId = $input->getArgument('fleetId');
         $vehiclePlateNumber = $input->getArgument('vehiclePlateNumber');
 
+        /** @psalm-suppress TypeDoesNotContainType */
+        if (!\is_string($fleetId) || !\is_string($vehiclePlateNumber)) {
+            throw new \InvalidArgumentException('Invalid argument type');
+        }
+
         $this->registerVehicleHandler->handle(new RegisterVehicle($vehiclePlateNumber, $fleetId));
+
+        $output->writeln('Vehicle registered successfully.');
 
         return self::SUCCESS;
     }

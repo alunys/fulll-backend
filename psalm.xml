@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<psalm
+        errorLevel="1"
+        resolveFromConfigFile="true"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="https://getpsalm.org/schema/config"
+        xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+        findUnusedBaselineEntry="true"
+        findUnusedCode="true"
+        phpVersion="8.3"
+>
+    <projectFiles>
+        <directory name="src"/>
+        <ignoreFiles>
+            <directory name="vendor"/>
+        </ignoreFiles>
+    </projectFiles>
+
+    <issueHandlers>
+        <PossiblyUnusedMethod>
+            <errorLevel type="suppress">
+                <file name="src/App/Command/*"/>
+                <file name="src/App/Query/*"/>
+            </errorLevel>
+        </PossiblyUnusedMethod>
+        <UnusedClass>
+            <errorLevel type="suppress">
+                <file name="src/DataFixtures/*"/>
+                <file name="src/App/**/*"/>
+                <file name="src/Infra/Repository/Doctrine/ORM/*"/>
+                <file name="src/Infra/Repository/Memory/*"/>
+                <file name="src/Ui/Console/*"/>
+            </errorLevel>
+        </UnusedClass>
+    </issueHandlers>
+    <plugins>
+        <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin"/>
+        <pluginClass class="Weirdan\DoctrinePsalmPlugin\Plugin"/>
+    </plugins>
+</psalm>

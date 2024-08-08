@@ -10,7 +10,7 @@ use Fulll\Domain\Repository\FleetRepositoryInterface;
 final class FleetRepository implements FleetRepositoryInterface
 {
     /** @var Fleet[] */
-    static private array $fleets = [];
+    private static array $fleets = [];
 
     public function getById(string $id): ?Fleet
     {
@@ -32,7 +32,7 @@ final class FleetRepository implements FleetRepositoryInterface
     {
         // Check if another fleet is already assigned to the user of this fleet
         foreach (self::$fleets as $fleetId => $existingFleet) {
-            if($fleetId === $fleet->id) {
+            if ($fleetId === $fleet->id) {
                 continue;
             }
 

@@ -9,13 +9,13 @@ use Fulll\Domain\ValueObject\Location;
 
 class Vehicle
 {
+    /** @psalm-suppress PossiblyUnusedProperty */
     public readonly string $id;
 
     public function __construct(
         public readonly string $plateNumber,
         private ?Location $location = null,
-    )
-    {
+    ) {
         $this->id = uniqid();
     }
 

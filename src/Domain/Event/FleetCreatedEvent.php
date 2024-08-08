@@ -1,8 +1,8 @@
 <?php
 
-namespace Fulll\Domain\Event;
+declare(strict_types=1);
 
-use Fulll\Domain\Model\Fleet;
+namespace Fulll\Domain\Event;
 
 final readonly class FleetCreatedEvent
 {

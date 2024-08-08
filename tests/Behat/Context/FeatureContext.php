@@ -6,9 +6,8 @@ namespace Fulll\Tests\Behat\Context;
 
 use Behat\Behat\Context\Context;
 use Behat\Step\Given;
-use Behat\Step\When;
 use Behat\Step\Then;
-use Exception;
+use Behat\Step\When;
 use Fulll\App\Command\CreateFleet;
 use Fulll\App\Command\CreateFleetHandler;
 use Fulll\App\Command\ParkVehicle;
@@ -29,20 +28,26 @@ use Fulll\Domain\ValueObject\Location;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\Container;
 
-class FeatureContext extends KernelTestCase implements Context
+/**
+ * @internal
+ *
+ * @coversNothing
+ */
+final class FeatureContext extends KernelTestCase implements Context
 {
     private ?Fleet $myFleet = null;
     private ?Fleet $anotherUserFleet = null;
     private ?Vehicle $aVehicle = null;
-    private ?Exception $exceptionCaught = null;
+    private ?\Exception $exceptionCaught = null;
     private Location $aLocation;
     private string $aUserId;
     private Container $container;
 
     public function __construct()
     {
+        parent::__construct();
         self::bootKernel();
-        $this->container = static::getContainer();
+        $this->container = self::getContainer();
     }
 
     #[Given('my fleet')]
@@ -148,7 +153,6 @@ class FeatureContext extends KernelTestCase implements Context
     public function iCreateAFleetForThisUser(): void
     {
         $this->container->get(CreateFleetHandler::class)->handle(new CreateFleet($this->aUserId));
-
     }
 
     #[Then('I should be able to retrieve the fleet created for user')]

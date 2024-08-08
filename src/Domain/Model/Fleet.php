@@ -11,15 +11,12 @@ use Fulll\Domain\Exception\VehicleIsAlreadyRegisteredInFleetException;
 class Fleet
 {
     public readonly string $id;
+    /** @var Collection<array-key, Vehicle> */
     private Collection $vehicles;
 
-    /**
-     * @param Vehicle[] $vehicles
-     */
     public function __construct(
         public string $userId,
-    )
-    {
+    ) {
         $this->id = uniqid();
         $this->vehicles = new ArrayCollection();
     }
@@ -53,5 +50,4 @@ class Fleet
 
         return null;
     }
-
 }

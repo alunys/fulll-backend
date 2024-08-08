@@ -9,8 +9,9 @@ use Doctrine\Persistence\ObjectRepository;
 use Fulll\Domain\Model\Fleet;
 use Fulll\Domain\Repository\FleetRepositoryInterface;
 
-readonly class  FleetRepository implements FleetRepositoryInterface
+readonly class FleetRepository implements FleetRepositoryInterface
 {
+    /** @var ObjectRepository<Fleet> */
     private ObjectRepository $repository;
 
     public function __construct(private EntityManagerInterface $entityManager)
@@ -32,7 +33,7 @@ readonly class  FleetRepository implements FleetRepositoryInterface
     {
         // Check if another fleet is already assigned to the user of this fleet
         foreach ($this->repository->findAll() as $existingFleet) {
-            if($existingFleet->id === $fleet->id) {
+            if ($existingFleet->id === $fleet->id) {
                 continue;
             }
 
