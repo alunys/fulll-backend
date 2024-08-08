@@ -20,3 +20,7 @@ cs-fixer:
 
 phpstan: vendor
 	$(QA) phpstan analyze
+
+psalm: vendor
+	$(QA) psalm
+	$(QA) psalm -c psalm.tests.xml
